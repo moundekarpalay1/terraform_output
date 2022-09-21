@@ -9,6 +9,8 @@ terraform {
 
 provider "aws" {
   region = var.aws_region
+  access_key = "AKIAQOYVVZDBBXEZYIGE"
+  secret_key = "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"
 }
 
 data "aws_availability_zones" "available" {
@@ -95,19 +97,16 @@ module "ec2_instances" {
   subnet_ids         = module.vpc.private_subnets[*]
   security_group_ids = [module.app_security_group.this_security_group_id]
 }
-
 resource "aws_db_subnet_group" "private" {
   subnet_ids = module.vpc.private_subnets
 }
-
 resource "aws_db_instance" "database" {
-  allocated_storage = 5
-  engine            = "mysql"
-  instance_class    = "db.t2.micro"
+  allocated_storage    = 5
+  engine               = "mysql"
+  engine_version       = "8.0.28"
+  instance_class       = "db.t2.micro"
   username          = var.db_username
   password          = var.db_password
-
   db_subnet_group_name = aws_db_subnet_group.private.name
-
-  skip_final_snapshot = true
+  skip_final_snapshot  = true
 }

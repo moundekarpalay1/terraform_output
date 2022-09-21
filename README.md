@@ -5,3 +5,4 @@ Learn how Terraform output values allow you to export structured data about your
 Follow along [with this
 tutorial](https://learn.hashicorp.com/tutorials/terraform/outputs?in=terraform/configuration-language) on HashiCorp
 Learn.
+# terraform_output
